@@ -30,7 +30,7 @@ document.getElementById('predictButton').addEventListener('click', async functio
                 const dprs = oprData.dprs || {};  //finally making them into arrays
                 const ccwms = oprData.ccwms || {};
 
-                data.sort((a, b) => a.match_number - b.match_number); //sorting in order
+                data.splice(0, data.length, ...data.filter(m => m.comp_level === 'qm').sort((a, b) => a.match_number - b.match_number));
 
                 console.log(`📥 Successfully retrieved matches. Filtering schedule:\n`);
                 console.log("-------------------------------------------------");
