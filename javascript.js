@@ -1,8 +1,6 @@
 document.getElementById('predictButton').addEventListener('click', async function() {
     console.log("PROGRAM STARTED!");
-
-    //const defaultClient = TbaApiV3client.ApiClient.instance;
-   // const apiKeyConfig = defaultClient.authentications['apiKey']; this the old stuff
+    
     const apiKey = "ukqYw6gLRcDFrqFozY4irknvHZwTgB86fkm3fOtPyYrn022u7BFEKVOPV6JSDUjT";
     const baseUrl = "https://www.thebluealliance.com/api/v3";
     const eventKey = document.getElementById('eventKeyInput').value;
@@ -12,22 +10,22 @@ document.getElementById('predictButton').addEventListener('click', async functio
         method: 'GET',
         headers: {
             'X-TBA-Auth-Key': apiKey,
-            'accept': 'application/json' //idek this from gem and the docs, for the new fetch way of getting data
+            'accept': 'application/json' 
         }
     };
     try {
         const [matchesResponse, teamsResponse, oprsResponse] = await Promise.all([
             fetch(`${baseUrl}/event/${eventKey}/matches`, fetchOptions),
-            fetch(`${baseUrl}/event/${eventKey}/teams`, fetchOptions), //actually fetching the array
+            fetch(`${baseUrl}/event/${eventKey}/teams`, fetchOptions), 
             fetch(`${baseUrl}/event/${eventKey}/oprs`, fetchOptions)
         ]);
 
         const data = await matchesResponse.json();
-        const teamData = await teamsResponse.json(); //parsing
+        const teamData = await teamsResponse.json();
         const oprData = await oprsResponse.json();
 
                 const oprs = oprData.oprs || {};
-                const dprs = oprData.dprs || {};  //finally making them into arrays
+                const dprs = oprData.dprs || {};  
                 const ccwms = oprData.ccwms || {};
 
                 data.splice(0, data.length, ...data.filter(m => m.comp_level === 'qm').sort((a, b) => a.match_number - b.match_number));
@@ -142,7 +140,7 @@ document.getElementById('predictButton').addEventListener('click', async functio
                 var percentCorrect = 100*totalTrue/checkedMatches;
                 percentCorrect = Math.round(percentCorrect * 100.0)/100.0;
                 htmlOutput += percentCorrect + "% accuracy!";
-                document.getElementById('outputDisplay').innerHTML = htmlOutput; //sends this string to the html file to print in a single box, at least for now. later will
+                document.getElementById('outputDisplay').innerHTML = htmlOutput; 
 
   }       catch (error) {
         console.error("An error occurred while fetching or processing data:", error);
