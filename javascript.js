@@ -1,7 +1,7 @@
 document.getElementById('predictButton').addEventListener('click', async function() {
     console.log("PROGRAM STARTED!");
     
-    const apiKey = "ukqYw6gLRcDFrqFozY4irknvHZwTgB86fkm3fOtPyYrn022u7BFEKVOPV6JSDUjT";
+    const apiKey = 
     const baseUrl = "https://www.thebluealliance.com/api/v3";
     const eventKey = document.getElementById('eventKeyInput').value;
     var totalTrue =0;
